@@ -1,0 +1,47 @@
+
+usage() {
+  echo "pensieve.sh shortfact <topic> \"Your text to remember in markup format\""
+  echo "For example:"
+  echo "pensieve.sh shortfact tech/kubernetes \"Fire up a shell in a cluster with `kubectl run tmp-shell --rm -i --tty --image centos -- /bin/bash`\""
+  echo "   Will add the entry to tech/kubernetes/shortfacts.md and automatically commit to git."
+  echo "pensieve.sh edit tech/kubernetes "
+  echo "    Will open the web editor for tech/kubernetes/README.md if the topic exists. Will create file if not present."
+  echo "pensieve.sh edit tech/kubernetes/networking.md"
+  echo "    Will open the web editor for tech/kubernetes/networking.md. Will create file if not present."
+  echo "pensieve.sh undo"
+  echo "   Will undo the latest change." 
+  echo "pensieve delete tech/kubernetes"
+  echo "    Will delete the folder/file and push the changes to git."
+}
+
+# param. $1: Topic path
+# param. $2: Shortfact as string
+add_shortfact() {
+  TARGET_PATH=${PENSIEVE_HOME}/$1
+  SHORTFACT=$2
+  backtick='`'
+  SHORTFACT="${SHORTFACT//>/$backtick}"
+  SHORTFACT="${SHORTFACT//</$backtick}"
+  echo $SHORTFACT
+  if [ ! -d "$DIRECTORY" ]; then
+      mkdir -p $TARGET_PATH
+  fi
+  cd $TARGET_PATH
+  echo "" >> shortfacts.md
+  echo "---" >> shortfacts.md
+  echo "" >> shortfacts.md
+  echo "$SHORTFACT" >> shortfacts.md
+  git add shortfacts.md
+  git commit -m "Added a shortfact for topic $1"
+  git push
+  exit 0
+}
+
+
+COMMAND=$1
+
+if [ "$COMMAND" = "shortfact" ]; then
+  add_shortfact "$2" "$3"
+fi
+
+usage
