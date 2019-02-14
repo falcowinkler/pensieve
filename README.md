@@ -5,6 +5,10 @@ I noticed that i actually learn a lot during daily work that i need one year lat
 
 So, this tool should help to avoid that.
 
+> The name ‘Pensieve’ is a homonym of ‘pensive’, meaning deeply, seriously thoughtful; 
+> but it also a pun, the ‘sieve’ part of the word alluding to the object’s function 
+> of sorting meanings from a mass of thoughts or memories.
+> ~ https://www.pottermore.com/writing-by-jk-rowling/pensieve
 ## Setup
 
 Set the two required environment variables in your `~/.bash_profile`: 
