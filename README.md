@@ -1,6 +1,6 @@
 ## What is pensieve
 
-I noticed that i actually learn a lot during daily work that i need one year later, but of course all i can say then is,
+I noticed that i learn a lot during daily work that i need a long while later, but of course all i can say then is,
 "oh yeah i did that once back then but i have no idea how".
 
 So, this tool should help to avoid that.
