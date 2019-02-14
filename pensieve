@@ -23,7 +23,7 @@ add_shortfact() {
   SHORTFACT="${SHORTFACT//>/$backtick}"
   SHORTFACT="${SHORTFACT//</$backtick}"
   echo $SHORTFACT
-  if [ ! -d "$DIRECTORY" ]; then
+  if [ ! -d "$TARGET_PATH" ]; then
       mkdir -p $TARGET_PATH
   fi
   cd $TARGET_PATH
@@ -37,11 +37,32 @@ add_shortfact() {
   exit 0
 }
 
+# $1: topic path
+edit_page() {
+  TARGET_PATH="${PENSIEVE_HOME}/$(dirname "$1")"
+  if [ ! -d "$TARGET_PATH" ]; then
+      mkdir -p $TARGET_PATH
+  fi
+  FULL_FILEPATH=${PENSIEVE_HOME}/$1
+  if [ ! -f "$FULL_FILEPATH" ]; then
+     touch $FULL_FILEPATH
+  fi
+  cd $PENSIEVE_HOME
+  git add .
+  git commit -m "Created empty fields before editing a page"
+  git push
+  python -mwebbrowser "${PENSIEVE_GIT}/edit/master/$1"
+  exit 0
+}
+
 
 COMMAND=$1
 
 if [ "$COMMAND" = "shortfact" ]; then
   add_shortfact "$2" "$3"
+fi
+if [ "$COMMAND" = "edit" ]; then
+  edit_page $2
 fi
 
 usage
