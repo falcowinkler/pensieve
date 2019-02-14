@@ -20,8 +20,7 @@ add_shortfact() {
   TARGET_PATH=${PENSIEVE_HOME}/$1
   SHORTFACT=$2
   backtick='`'
-  SHORTFACT="${SHORTFACT//>/$backtick}"
-  SHORTFACT="${SHORTFACT//</$backtick}"
+  SHORTFACT="${SHORTFACT//;;/$backtick}"
   echo $SHORTFACT
   if [ ! -d "$TARGET_PATH" ]; then
       mkdir -p $TARGET_PATH
