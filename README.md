@@ -1,14 +1,27 @@
+## What is pensieve
+
 I noticed that i actually learn a lot during daily work that i need one year later, but of course all i can say then is,
 "oh yeah i did that once back then but i have no idea how".
 
 So, this tool should help to avoid that.
 
-### How to use the pensieve
+## Setup
 
-Quickly remember a fact about kubernetes:
+Set the two required environment variables in your `~/.bash_profile`: 
 
 ```bash
-pensieve shortfact tech/kubernetes "Fire up a shell in a cluster with ;;kubectl run tmp-shell --rm -i --tty --image centos -- /bin/bash;;""
+export PENSIEVE_HOME=/Users/myuser/Desktop/my-pensieve-folder
+export PENSIEVE_GIT=https://github.com/my-user/pensieve
+```
+
+Put the `pensieve` script somewhere in your `PATH`, e.g. in `/usr/local/bin`.
+
+## How to Use
+
+Quickly remember a useful kubernetes command (or anything else you want to remember):
+
+```bash
+pensieve shortfact tech/kubernetes "get all pods ;;kubectl get pods --all-namespaces""
 ```
 
 This will add a seperate line in the file tech/kubernetes/shortfacts.md that contains your fact. Please use `;;` to escape the backtick that is used in github to escape code.
